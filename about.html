@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>About Us - Makeup E-Commerce</title>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Reset */
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: url('images/1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Josefin Sans', sans-serif;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      padding-top: 80px;
+    }
+
+    /* Navigation Bar Styling */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 70px;
+      background-color: rgba(162, 35, 21, 0.9);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      position: fixed;
+      width: 90%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      height: 60px;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 18px;
+      font-family: 'Josefin Sans', sans-serif;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-links a:hover {
+      background-color: #90210b;
+      border-radius: 8px;
+      transform: scale(1.1);
+    }
+    .cart-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .cart-link .cart {
+      color: white !important;
+      font-size: 22px;
+      font-weight: bold;
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+    }
+
+    .cart-link .cart i {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .cart-link:hover .cart i {
+      transform: scale(1.1);
+    }
+
+    .logo img {
+      height: 125px;
+      width: 170px;
+      margin-top: 27px;
+      animation: bounce 3s infinite ease-in-out;
+      transition: transform 0.3s, filter 0.3s;
+    }
+
+    .logo img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0px 0px 15px rgba(255, 200, 150, 0.8));
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* About Us Section Styling */
+    .section-container {
+      max-width: 1600px;
+      margin: 30px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+      text-align: center;
+    }
+
+    .section-container:first-child {
+      margin-top: 4px;
+      animation: slideInFromTop 1s ease forwards;
+    }
+
+    @keyframes slideInFromTop {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-container:nth-child(1) { animation-delay: 0.2s; }
+    .section-container:nth-child(2) { animation-delay: 0.4s; }
+    .section-container:nth-child(3) { animation-delay: 0.6s; }
+    .section-container:nth-child(4) { animation-delay: 0.8s; }
+    .section-container:nth-child(5) { animation-delay: 1s; }
+    .section-container:nth-child(6) { animation-delay: 1.2s; }
+
+    .section-container:nth-child(3) {
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .section-header h2 {
+      font-size: 42px;
+      color: #90210b;
+      font-family: 'Josefin Sans', sans-serif;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #90210b, transparent);
+    }
+
+    .about-header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      padding: 10px;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .about-header h1 {
+      font-size: 42px;
+      color: #90210b;
+      font-family: 'Josefin Sans', sans-serif;
+      margin-bottom: 20px;
+      opacity: 1;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      font-weight: 600;
+      text-align: center;
+      animation: scaleIn 1s ease forwards;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .about-header p {
+      font-size: 18px;
+      color: #5a1a0a;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.8;
+      opacity: 1;
+      text-align: center;
+    }
+
+    .mission-section {
+      background: linear-gradient( rgba(255, 229, 173, 0.95));
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .mission-section p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #5a1a0a;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stats-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 30px auto;
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      padding: 0 20px;
+    }
+
+    .stats-section .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .stats-section .section-header h2 {
+      text-align: center;
+      color: #90210b;
+    }
+
+    .stats-section .section-header h2::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      width: 100%;
+    }
+
+    .stat-card {
+      background: rgba(250, 190, 176, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-number {
+      font-size: 36px;
+      color: #90210b;
+      font-weight: bold;
+      margin-bottom: 10px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .stat-number.animate {
+      animation: countUp 2s ease-out forwards;
+    }
+
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: #5a1a0a;
+      transition: transform 0.3s ease;
+    }
+
+    .why-choose-us {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0;
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+    }
+
+    .why-choose-us .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .why-choose-us .section-header h2 {
+      text-align: center;
+    }
+
+    .why-choose-us .section-header h2::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .why-choose-us-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      width: 100%;
+    }
+
+    .why-choose-us .card {
+      background: rgba(250, 235, 219, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-width: 200px;
+      overflow: hidden;
+    }
+
+    .why-choose-us .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .why-choose-us .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .why-choose-us .card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .why-choose-us .card i {
+      font-size: 48px;
+      color: #90210b;
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+      position: relative;
+      display: inline-block;
+    }
+
+    .why-choose-us .card:hover i {
+      transform: scale(1.2) rotate(5deg);
+      color: #a94438;
+    }
+
+    .why-choose-us .card i::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(144, 33, 11, 0.1);
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.4s ease;
+      z-index: -1;
+    }
+
+    .why-choose-us .card:hover i::after {
+      transform: scale(1.5);
+    }
+
+    .why-choose-us .card h3 {
+      font-size: 24px;
+      color: #90210b;
+      margin-bottom: 15px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 600;
+      transition: transform 0.3s ease;
+    }
+
+    .why-choose-us .card:hover h3 {
+      transform: translateY(-5px);
+    }
+
+    .why-choose-us .card p {
+      font-size: 16px;
+      color: #5a1a0a;
+      line-height: 1.6;
+      transition: transform 0.3s ease;
+    }
+
+    .why-choose-us .card:hover p {
+      transform: translateY(-5px);
+    }
+
+    @media (max-width: 1200px) {
+      .why-choose-us-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .why-choose-us-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
+
+    .commitment-section {
+      background: linear-gradient(135deg, rgba(255, 229, 173, 0.95), rgba(255, 240, 245, 0.95));
+      padding: 30px;
+      border-radius: 15px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .commitment-section p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #5a1a0a;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .team-section {
+      margin: 10px 0;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .team-member {
+      background: rgba(255, 248, 240, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .team-member:nth-child(1) { animation-delay: 0.3s; }
+    .team-member:nth-child(2) { animation-delay: 0.4s; }
+    .team-member:nth-child(3) { animation-delay: 0.5s; }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .team-member img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid #90210b;
+      transition: transform 0.3s ease;
+      object-fit: cover;
+    }
+
+    .team-member:hover img {
+      transform: scale(1.1);
+    }
+
+    .team-member h3 {
+      font-size: 20px;
+      color: #90210b;
+      margin-bottom: 5px;
+      font-family: 'Satisfy', cursive;
+    }
+
+    .team-member p {
+      font-size: 16px;
+      color: #5a1a0a;
+      margin-bottom: 10px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      color: #90210b;
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #a94438;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 1600px) {
+      .section-container {
+        max-width: 1400px;
+        padding: 60px;
+      }
+    }
+
+    @media (max-width: 1400px) {
+      .section-container {
+        max-width: 1200px;
+        padding: 50px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .section-container {
+        max-width: 1000px;
+        padding: 40px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
+
+    footer {
+      background-color: rgba(162, 35, 21, 0.8);
+      color: white;
+      padding: 7px 10px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: rgb(254, 251, 251);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    footer h3 {
+      color: #f8eeef;
+      font-size: 1.1rem;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    footer ul li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    footer .footer-note {
+      text-align: center;
+      margin-top: 4px;
+      font-size: 0.85rem;
+      border-top: 1px solid rgb(251, 189, 189);
+      padding-top: 5px;
+    }
+
+    .login-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #90210b;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .login-button:hover {
+      background-color: #a94438;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="makeup.html">Makeup</a>
+        <a href="skincare.html">Skincare</a>
+        <a href="haircare.html">Haircare</a>
+        <a href="about.html">About</a>
+        <a href="contact us.html">Contact</a>
+      </div>
+    </div>
+    
+    <div class="cart-logo-container">
+      <a href="cart.html" class="cart-link">
+        <div class="cart">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+      </a>
+      
+      <div class="logo">
+        <img id="animatedLogo" src="images/LOGO1.png" alt="Blush & Bloom Logo">
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Us Content -->
+  <div class="section-container">
+    <div class="about-header">
+      <h1>About Us</h1>
+      <p>Welcome to Blush & Bloom, your ultimate destination for premium makeup and skincare products! We are passionate about offering the best of beauty to our customers by providing a wide range of top-rated products from your favorite brands.</p>
+    </div>
+  </div>
+
+  <div class="section-container">
+    <div class="mission-section">
+      <div class="section-header">
+        <h2>Our Mission</h2>
+      </div>
+      <p>At Blush & Bloom, our mission is simple: to empower individuals to express themselves confidently through the art of makeup and skincare. We believe that beauty is unique and personal, and we are here to provide you with the tools to enhance your natural beauty, with products that cater to every skin tone, type, and personal style.</p>
+    </div>
+  </div>
+
+  <div class="section-container">
+    <div class="stats-section">
+      <div class="section-header">
+        <h2>Our Numbers</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" data-target="10K+">0</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="500+">0</div>
+          <div class="stat-label">Products</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="50+">0</div>
+          <div class="stat-label">Brands</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="24/7">0</div>
+          <div class="stat-label">Support</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-container">
+    <div class="why-choose-us">
+      <div class="section-header">
+        <h2>Why Choose Us?</h2>
+      </div>
+      <div class="why-choose-us-grid">
+        <div class="card">
+          <i class="fas fa-gem"></i>
+          <h3>Quality Products</h3>
+          <p>We offer authentic, top-quality products from renowned brands in the beauty industry.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-dollar-sign"></i>
+          <h3>Affordable Prices</h3>
+          <p>Our products are priced competitively to give you the best value without compromising on quality.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-truck"></i>
+          <h3>Fast Delivery</h3>
+          <p>Enjoy quick and reliable delivery services to get your beauty products delivered right to your door.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-container">
+    <div class="commitment-section">
+      <div class="section-header">
+        <h2>Our Commitment to You</h2>
+      </div>
+      <p>We are committed to providing the highest level of service and quality. Our team continuously updates our collection to ensure we bring you the latest beauty trends and innovations. Shopping with us means you're choosing quality, trust, and a touch of glamour!</p>
+    </div>
+  </div>
+
+  <div class="section-container">
+    <div class="team-section">
+      <div class="section-header">
+        <h2>Meet Our Team</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="images/straighthairirl.jpg" alt="Sarah Johnson">
+          <h3>Sarah Johnson</h3>
+          <p>Founder & CEO</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="team-member">
+          <img src="images/wavyhairirl.jpg" alt="Michael Chen">
+          <h3>Michael Chen</h3>
+          <p>Creative Director</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="team-member">
+          <img src="images/vurlyhairirl.jpg" alt="Emma Davis">
+          <h3>Emma Davis</h3>
+          <p>Beauty Expert</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Pages</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="makeup.html">Makeup</a></li>
+          <li><a href="skincare.html">Skincare</a></li>
+          <li><a href="haircare.html">Haircare</a></li>
+          <li><a href="contact us.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <p>Email: support@blus&bloom.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Address: 123 Beauty Lane, Glam City, India</p>
+      </div>
+
+      <div>
+        <h3>Policies</h3>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Follow Us</h3>
+        <div style="font-size: 1.5rem;">
+          <a href="#"><i class="fab fa-facebook"></i></a>&nbsp;&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-instagram"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <p>&copy; 2025 Glow Beauty. All rights reserved. Designed with 💖 by Blush & Bloom Team.</p>
+    </div>
+  </footer>
+
+  <a href="login.html" class="login-button">Login</a>
+
+  <script>
+    // Add animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          if (entry.target.classList.contains('stat-number')) {
+            const target = parseInt(entry.target.getAttribute('data-target'));
+            let count = 0;
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+
+            const updateCount = () => {
+              count += increment;
+              if (count < target) {
+                entry.target.textContent = Math.floor(count) + (entry.target.getAttribute('data-target').includes('+') ? '+' : '');
+                requestAnimationFrame(updateCount);
+              } else {
+                entry.target.textContent = entry.target.getAttribute('data-target');
+              }
+            };
+
+            updateCount();
+          }
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    // Observe all animated elements
+    document.querySelectorAll('.stat-card, .team-member, .card, .stat-number').forEach(element => {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>

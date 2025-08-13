@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Blush & Bloom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      background: url("images/1.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding-top: 80px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 70px;
+      background-color: rgba(162, 35, 21, 0.9);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      height: 60px;
+      position: fixed;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 16px;
+      font-family: 'Josefin Sans', sans-serif;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .nav-links a:hover {
+      background-color: #90210b;
+      border-radius: 8px;
+      transform: scale(1.1);
+    }
+
+    .cart-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .cart-link .cart {
+      color: white !important;
+      font-size: 22px;
+      font-weight: bold;
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+    }
+
+    .cart-link .cart i {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .cart-link:hover .cart i {
+      transform: scale(1.1);
+    }
+
+    .logo img {
+      height: 125px;
+      width: 170px;
+      margin-top: 27px;
+      animation: bounce 3s infinite ease-in-out;
+      transition: transform 0.3s, filter 0.3s;
+    }
+
+    .logo img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0px 0px 15px rgba(255, 200, 150, 0.8));
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Login Container */
+    .auth-container {
+      max-width: 1000px;
+      width: 90%;
+      margin: 40px auto;
+      display: flex;
+      gap: 0;
+      padding: 30px;
+      position: relative;
+      min-height: 600px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .auth-box {
+      flex: 1;
+      background: rgba(255, 240, 245, 0.95);
+      padding: 40px;
+      border-radius: 20px 0 0 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .auth-box form {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 10px 0;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      color: #5a1a0a;
+      margin-bottom: 8px;
+      font-weight: 500;
+      transition: all 0.3s;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #a94438;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: #a94438;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin: 15px 0;
+      color: #5a1a0a;
+      font-size: 14px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+      color: #5a1a0a;
+      width: 100%;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #a94438;
+    }
+
+    .divider span {
+      padding: 0 15px;
+      font-size: 14px;
+      color: #5a1a0a;
+    }
+
+    .social-login {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .social-login p {
+      text-align: center;
+      color: #5a1a0a;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .social-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .social-btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .social-btn i {
+      font-size: 18px;
+    }
+
+    .logo-section {
+      flex: 0.8;
+      background: rgba(162, 35, 21, 0.9);
+      border-radius: 0 20px 20px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('images/LOGO1.png') no-repeat center;
+      background-size: 80%;
+      opacity: 0.1;
+    }
+
+    .logo-section h2 {
+      color: white;
+      font-family: 'Satisfy', cursive;
+      font-size: 28px;
+      margin-bottom: 15px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-section p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      text-align: center;
+      max-width: 90%;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 20px;
+    }
+
+    .logo-section img {
+      width: 150px;
+      height: auto;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Update form styles */
+    .auth-box h2 {
+      font-family: 'Satisfy', cursive;
+      color: #90210b;
+      font-size: 28px;
+      margin-bottom: 25px;
+      text-align: center;
+      position: relative;
+    }
+
+    .auth-box h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #a94438;
+      border-radius: 2px;
+    }
+
+    .auth-switch a {
+      color: #a94438;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .auth-switch a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .auth-box {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Popup Message */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      display: none;
+      z-index: 1000;
+      animation: popupFade 0.3s ease-out;
+    }
+
+    .popup h3 {
+      color: #90210b;
+      font-size: 24px;
+      margin-bottom: 15px;
+      font-family: 'Satisfy', cursive;
+    }
+
+    .popup p {
+      color: #5a1a0a;
+      margin-bottom: 20px;
+    }
+
+    .popup-btn {
+      padding: 10px 20px;
+      background: #a94438;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .popup-btn:hover {
+      background: #90210b;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 999;
+    }
+
+    @keyframes popupFade {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #a94438;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      transition: top 0.5s ease-in-out;
+    }
+
+    .notification.show {
+      top: 20px;
+    }
+
+    .notification i {
+      font-size: 20px;
+    }
+
+    .notification p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .notification .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+      padding: 0 5px;
+    }
+
+    .notification .close-btn:hover {
+      opacity: 0.8;
+    }
+
+    /* Remove the login button styles */
+    .login-btn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Add this for notification -->
+  <div class="notification" id="notification">
+    <i class="fas fa-check-circle"></i>
+    <p>Welcome to Blush & Bloom! We're excited to have you!</p>
+    <button class="close-btn" onclick="closeNotification()">&times;</button>
+  </div>
+
+  <!-- Add this for popup -->
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="popup">
+    <h3>Welcome to Blush & Bloom!</h3>
+    <p>Thank you for joining our beauty community. We're excited to have you!</p>
+    <button class="popup-btn" onclick="closePopup()">Continue</button>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="makeup.html">Makeup</a>
+        <a href="skincare.html">Skincare</a>
+        <a href="haircare.html">Haircare</a>
+        <a href="about.html">About</a>
+        <a href="contact us.html">Contact</a>
+      </div>
+    </div>
+    
+    <div class="cart-logo-container">
+      <a href="cart.html" class="cart-link">
+        <div class="cart">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+      </a>
+      
+      <div class="logo">
+        <img id="animatedLogo" src="images/LOGO1.png" alt="Blush & Bloom Logo">
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <!-- Login Form -->
+    <div class="auth-box">
+      <h2>Welcome Back!</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required>
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+      <div class="auth-switch">
+        Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a>
+      </div>
+      <div class="divider">
+        <span>or</span>
+      </div>
+      <div class="social-login">
+        <p>Login with</p>
+        <div class="social-buttons">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button class="social-btn facebook-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <h2>Blush & Bloom</h2>
+      <p>Discover your natural beauty with our premium beauty products. Join our community and experience the magic of self-care.</p>
+      <img src="images/LOGO1.png" alt="Blush & Bloom Logo">
+    </div>
+  </div>
+
+  <!-- Sign Up Form (Hidden by default) -->
+  <div class="auth-container" style="display: none;">
+    <div class="auth-box">
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" required>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" required>
+        </div>
+        <button type="submit" class="submit-btn">Sign Up</button>
+      </form>
+      <div class="auth-switch">
+        Already have an account? <a href="#" onclick="toggleForms()">Login</a>
+      </div>
+      <div class="divider">
+        <span>or</span>
+      </div>
+      <div class="social-login">
+        <p>Sign up with</p>
+        <div class="social-buttons">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button class="social-btn facebook-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <h2>Blush & Bloom</h2>
+      <p>Join our beauty community and get access to exclusive products, tips, and offers. Start your beauty journey with us today!</p>
+      <img src="images/LOGO1.png" alt="Blush & Bloom Logo">
+    </div>
+  </div>
+
+  <script>
+    function toggleForms() {
+      const loginContainer = document.querySelector('.auth-container:first-of-type');
+      const signupContainer = document.querySelector('.auth-container:last-of-type');
+      
+      if (loginContainer.style.display === 'none') {
+        loginContainer.style.display = 'flex';
+        signupContainer.style.display = 'none';
+      } else {
+        loginContainer.style.display = 'none';
+        signupContainer.style.display = 'flex';
+      }
+    }
+
+    function showPopup() {
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    // Update notification functions
+    function showNotification() {
+      const notification = document.getElementById('notification');
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    function closeNotification() {
+      const notification = document.getElementById('notification');
+      notification.classList.remove('show');
+    }
+
+    // Update form submission handlers
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Add your login logic here
+      console.log('Login attempt:', { email, password });
+      showNotification();
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+      
+      // Add your signup logic here
+      console.log('Signup attempt:', { name, email, password });
+      showNotification();
+    });
+  </script>
+</body>
+</html>

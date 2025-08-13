@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>homepage</title>
+  
+  <link href="hom.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <style>
+    /* Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: linear-gradient(135deg, rgba(255, 240, 245, 0.7), rgba(255, 229, 173, 0.7));
+      padding: 60px 20px;
+      text-align: center;
+      margin: 50px 0;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(5px);
+    }
+    .newsletter-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .newsletter-title {
+      font-size: 36px;
+      color: #8b1e0d;
+      margin-bottom: 20px;
+      font-family: 'Satisfy', cursive;
+    }
+    .newsletter-text {
+      font-size: 18px;
+      color: #5a1a0a;
+      margin-bottom: 30px;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .newsletter-input {
+      padding: 12px 20px;
+      border: 2px solid #a94438;
+      border-radius: 25px;
+      width: 300px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .newsletter-input:focus {
+      border-color: #90210b;
+    }
+    .newsletter-btn {
+      padding: 12px 30px;
+      background: #a94438;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .newsletter-btn:hover {
+      background: #90210b;
+      transform: scale(1.05);
+    }
+    .newsletter-benefits {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #5a1a0a;
+    }
+    .benefit-item i {
+      color: #a94438;
+      font-size: 20px;
+    }
+
+    /* Featured Products Rating */
+    .rating {
+      color: #ffd700;
+      font-size: 16px;
+      margin: 5px 0;
+    }
+    .rating i {
+      margin-right: 2px;
+    }
+
+    /* Slideshow Container */
+    .slideshow-container {
+      width: 80%;
+      margin: 50px auto;
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    /* Featured Products Section */
+    .featured-products {
+      position: relative;
+      padding: 40px 20px;
+      margin-top: 50px;
+      text-align: center;
+      overflow: hidden;
+      height: auto;
+      min-height: 500px;
+      border-radius: 70px 0 0 70px;
+      border-top-left-radius: 80px;
+      border-bottom-right-radius: 80px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .featured-products h2 {
+      font-size: 38px;
+      margin-bottom: 40px;
+      color: #890a05;
+      font-family: inherit;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* View All Button */
+    .view-all-container {
+      text-align: center;
+      margin: 30px 0;
+      padding: 20px 0;
+    }
+
+    .view-all-btn {
+      background-color: #b80606;
+      color: white;
+      padding: 12px 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .view-all-btn:hover {
+      background-color: #90020b;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Add fade-in to specific sections */
+    .brands-container,
+    .slideshow-container,
+    .featured-products,
+    .newsletter-section,
+    .view-all-container {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .brands-container.visible,
+    .slideshow-container.visible,
+    .featured-products.visible,
+    .newsletter-section.visible,
+    .view-all-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cart-link .cart {
+      color: white !important;
+      font-size: 22px;
+      font-weight: bold;
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+    }
+
+    .cart-link .cart i {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .cart-link:hover .cart i {
+      transform: scale(1.1);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #a94438;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: none;
+      z-index: 9999;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .toast.show {
+      display: block;
+    }
+  </style>
+</head>
+<body background= "images/1.jpg" width="1240" height="900">
+  <!-- Add toast notification right after body tag -->
+  <div id="cart-toast" class="toast">
+    Item added to cart! 🛒
+  </div>
+
+  <!-- Navigation Bar -->  
+  <nav>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="makeup.html">Makeup</a>
+        <a href="skincare.html">Skincare</a>
+        <a href="haircare.html">Haircare</a>
+        <a href="about.html">About</a>
+        <a href="contact us.html">Contact</a>
+      </div>
+    </div>
+    
+    <div class="cart-logo-container">
+      <a href="cart.html" class="cart-link">
+        <div class="cart">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+      </a>
+      
+      <div class="logo">
+        <img id="animatedLogo" src="images/LOGO1.png" alt="Blush & Bloom Logo">
+      </div>
+    </div>
+    
+  </nav>
+  
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Unveil Your Natural Beauty</h1>
+      <p>Discover the essence of elegance with our exclusive beauty products, designed to enhance your natural glow.</p><br><br>
+  
+      <button class="btn">
+      <div class="wrapper">
+        <p class="text">Explore</p>
+
+      <div class="flower flower1">
+        <div class="petal one"></div>
+        <div class="petal two"></div>
+        <div class="petal three"></div>
+        <div class="petal four"></div>
+      </div>
+      <div class="flower flower2">
+        <div class="petal one"></div>
+        <div class="petal two"></div>
+        <div class="petal three"></div>
+        <div class="petal four"></div>
+      </div>
+      <div class="flower flower3">
+        <div class="petal one"></div>
+        <div class="petal two"></div>
+        <div class="petal three"></div>
+        <div class="petal four"></div>
+      </div>
+      <div class="flower flower4">
+        <div class="petal one"></div>
+        <div class="petal two"></div>
+        <div class="petal three"></div>
+        <div class="petal four"></div>
+      </div>
+      <div class="flower flower5">
+        <div class="petal one"></div>
+        <div class="petal two"></div>
+        <div class="petal three"></div>
+        <div class="petal four"></div>
+      </div>
+      <div class="flower flower6">
+        <div class="petal one"></div>
+        <div class="petal two"></div>
+        <div class="petal three"></div>
+        <div class="petal four"></div>
+      </div>
+      </div>
+    </button>
+
+    </div>
+  </div>
+  <a href="login.html" class="shop-btn">Login-in</a>
+ <!-- Brands Collaboration Section -->
+ <div class="brands-container fade-in">
+  <h2>Brands Collaboration</h2> <br>
+  <div class="slideshow-container fade-in">
+    <div class="slide fade"><img src="images/Fenty by Rihanna.jpg" alt="Brand 1"></div>
+    <div class="slide fade"><img src="images/macvglam.jpg" alt="Brand 2"></div>
+    <div class="slide fade"><img src="images/merge2.jpg" alt="Brand 3"></div>
+    <div class="slide fade"><img src="images/maybeline.jpg" alt="Brand 4"></div>
+    <div class="slide fade"><img src="images/merge1.png" alt="Brand 5"></div>
+  </div>
+</div>
+<script>
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    let slides = document.getElementsByClassName("slide");
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000); // Change slide every 3 seconds
+  }
+</script>
+
+  <!-- JavaScript for Extra Logo Animation -->
+  <script>
+    const logo = document.getElementById("animatedLogo");
+
+    logo.addEventListener("mouseover", () => {
+      logo.style.animation = "none";  // Stops the default bounce animation
+      logo.style.transform = "rotate(10deg) scale(1.2)"; // Rotate and enlarge
+    });
+
+    logo.addEventListener("mouseout", () => {
+      logo.style.animation = "bounce 3s infinite ease-in-out"; // Restart bounce animation
+      logo.style.transform = "scale(1) rotate(0deg)";
+    });
+  </script>
+
+  <!-- Featured Products Section -->
+  <section class="featured-products fade-in">
+    <h2>Featured Products</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn left">&#10094;</button>
+      <div class="carousel-track">
+        <div class="product-card">
+          <img src="images/crylipgloss.jpg" alt="Crystal Lip Gloss" class="shimmer">
+          <div class="product-info">
+            <h3>Crystal Lip Gloss</h3>
+            <p>₹499</p>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(4.5)</span>
+            </div>
+            <button class="add-to-cart-btn" data-name="Crystal Lip Gloss" data-price="499">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="images/hyfaceserum.jpg" alt="Hydrating Face Serum" class="shimmer">
+          <div class="product-info">
+            <h3>Hydrating Face Serum</h3>
+            <p>₹999</p>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(5.0)</span>
+            </div>
+            <button class="add-to-cart-btn" data-name="Hydrating Face Serum" data-price="999">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="images/rosblushpal.jpg" alt="Rosy Blush Palette" class="shimmer">
+          <div class="product-info">
+            <h3>Rosy Blush Palette</h3>
+            <p>₹799</p>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span>(4.0)</span>
+            </div>
+            <button class="add-to-cart-btn" data-name="Rosy Blush Palette" data-price="799">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="images/glohighli.jpg" alt="Glow Highlighter" class="shimmer">
+          <div class="product-info">
+            <h3>Glow Highlighter</h3>
+            <p>₹899</p>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(4.5)</span>
+            </div>
+            <button class="add-to-cart-btn" data-name="Glow Highlighter" data-price="899">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="images/shybodylot.jpg" alt="Shyny Body Lotion" class="shimmer">
+          <div class="product-info">
+            <h3>Shyny Body Lotion</h3>
+            <p>₹649</p>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span>(4.0)</span>
+            </div>
+            <button class="add-to-cart-btn" data-name="Shyny Body Lotion" data-price="649">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn right">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- View All Button -->
+  <div class="view-all-container fade-in">
+    <a href="makeup.html" class="view-all-btn">View All Products</a>
+  </div>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section fade-in">
+    <div class="newsletter-content">
+      <h2 class="newsletter-title">Join Our Beauty Community</h2>
+      <p class="newsletter-text">Subscribe to our newsletter for exclusive offers, beauty tips, and new product launches!</p>
+      <form class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </form>
+      <div class="newsletter-benefits">
+        <div class="benefit-item">
+          <i class="fas fa-gift"></i>
+          <span>Exclusive Offers</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-star"></i>
+          <span>Beauty Tips</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-bell"></i>
+          <span>New Launches</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Petals -->
+  <div class="petal petal1"></div>
+  <div class="petal petal2"></div>
+  <div class="petal petal3"></div>
+</section>
+
+<script>
+  const fadeEls = document.querySelectorAll('.fade-in');
+  window.addEventListener('scroll', () => {
+    fadeEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  });
+</script>
+<script>
+  const track = document.querySelector('.carousel-track');
+  const prevBtn = document.querySelector('.carousel-btn.left');
+  const nextBtn = document.querySelector('.carousel-btn.right');
+
+  function updateActiveCard() {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => card.classList.remove('active'));
+    const middleIndex = Math.floor(cards.length / 2);
+    if (cards[middleIndex]) {
+      cards[middleIndex].classList.add('active');
+    }
+  }
+
+  function rotateLeft() {
+    const firstCard = track.firstElementChild;
+    track.appendChild(firstCard);
+    updateActiveCard();
+  }
+
+  function rotateRight() {
+    const lastCard = track.lastElementChild;
+    track.prepend(lastCard);
+    updateActiveCard();
+  }
+
+  prevBtn.addEventListener('click', rotateRight);
+  nextBtn.addEventListener('click', rotateLeft);
+
+  window.addEventListener('DOMContentLoaded', updateActiveCard);
+</script>
+
+<script>
+  // Load cart from localStorage
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  function updateCart() {
+    const cartContent = document.getElementById('cart-content');
+    
+    if (cart.length === 0) {
+      cartContent.innerHTML = `
+        <div class="empty-cart">
+          <i class="fas fa-shopping-cart"></i>
+          <p>Your cart is empty</p>
+          <a href="home.html" class="continue-shopping">Continue Shopping</a>
+        </div>
+      `;
+      return;
+    }
+
+    let total = 0;
+    let html = '<ul class="cart-items">';
+    
+    cart.forEach((item, index) => {
+      const itemTotal = parseInt(item.price) * (item.quantity || 1);
+      total += itemTotal;
+      
+      html += `
+        <li class="cart-item">
+          <div class="item-details">
+            <div class="item-name">${item.name}</div>
+            <div class="item-price">₹${item.price}</div>
+          </div>
+          <div class="item-quantity">
+            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+            <span class="quantity">${item.quantity || 1}</span>
+            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${index})">
+            <i class="fas fa-trash"></i> Remove
+          </button>
+        </li>
+      `;
+    });
+    
+    html += '</ul>';
+    
+    html += `
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>₹${total}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span>Free</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total:</span>
+          <span>₹${total}</span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">
+          Proceed to Checkout
+        </button>
+      </div>
+    `;
+    
+    cartContent.innerHTML = html;
+  }
+
+  function updateQuantity(index, change) {
+    if (!cart[index].quantity) {
+      cart[index].quantity = 1;
+    }
+    cart[index].quantity = Math.max(1, cart[index].quantity + change);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  function checkout() {
+    alert('Thank you for your purchase! This is a demo website.');
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  // Add to cart functionality
+  const cartButtons = document.querySelectorAll('.add-to-cart-btn');
+  const cartToast = document.getElementById('cart-toast');
+
+  cartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const name = button.getAttribute('data-name');
+      const price = button.getAttribute('data-price');
+
+      // Check if item already exists in cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Show toast notification
+      cartToast.classList.add('show');
+      setTimeout(() => {
+        cartToast.classList.remove('show');
+      }, 2000);
+
+      // Update cart count
+      updateCartCount();
+    });
+  });
+
+  // Update cart count in navigation
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const cartCount = document.querySelector('.cart');
+    if (cartCount) {
+      cartCount.textContent = `🛒 ${totalItems}`;
+    }
+  }
+
+  // Initial cart update and count
+  updateCart();
+  updateCartCount();
+</script>
+
+<script>
+  const cartCountElement = document.getElementById("cart-count");
+  const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+
+  // Load cart count from localStorage on page load
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cartCountElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  // Add to cart functionality
+  addToCartButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const name = button.dataset.name;
+      const price = parseInt(button.dataset.price);
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItem = cart.find(item => item.name === name);
+
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+
+      // Optional: show toast
+      const cartToast = document.getElementById("cart-toast");
+      cartToast.classList.add("show");
+      setTimeout(() => cartToast.classList.remove("show"), 1500);
+    });
+  });
+
+  updateCartCount(); // update on page load
+</script>
+
+<script>
+  // Enhanced Fade-in Animation
+  const fadeElements = document.querySelectorAll('.fade-in');
+  
+  function checkFade() {
+    fadeElements.forEach(element => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+      
+      if (elementTop < window.innerHeight - elementVisible) {
+        element.classList.add('visible');
+      }
+    });
+  }
+
+  // Check on scroll and load
+  window.addEventListener('scroll', checkFade);
+  window.addEventListener('load', checkFade);
+
+  // Initial check for elements in view
+  checkFade();
+
+  // Newsletter Form
+  const newsletterForm = document.querySelector('.newsletter-form');
+  newsletterForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input[type="email"]').value;
+    alert('Thank you for subscribing! We will keep you updated with our latest news and offers.');
+    this.reset();
+  });
+
+  // Update Featured Products Ratings
+  const ratings = {
+    'Crystal Lip Gloss': 4.5,
+    'Hydrating Face Serum': 4.8,
+    'Rosy Blush Palette': 4.3,
+    'Glow Highlighter': 4.7,
+    'Shyny Body Lotion': 4.4
+  };
+
+  function updateRatings() {
+    document.querySelectorAll('.product-card').forEach(card => {
+      const productName = card.querySelector('h3').textContent;
+      const rating = ratings[productName] || 4.0;
+      const ratingHTML = generateRatingStars(rating);
+      card.querySelector('.rating').innerHTML = ratingHTML;
+    });
+  }
+
+  function generateRatingStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    let starsHTML = '';
+    
+    for (let i = 0; i < fullStars; i++) {
+      starsHTML += '<i class="fas fa-star"></i>';
+    }
+    if (hasHalfStar) {
+      starsHTML += '<i class="fas fa-star-half-alt"></i>';
+    }
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    for (let i = 0; i < emptyStars; i++) {
+      starsHTML += '<i class="far fa-star"></i>';
+    }
+    
+    return starsHTML;
+  }
+
+  updateRatings();
+</script>
+
+ <!-- Footer -->
+ <footer>
+  <div class="footer-container">
+    <div>
+      <h3>Pages</h3>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="makeup.html">Makeup</a></li>
+        <li><a href="skincare.html">Skincare</a></li>
+        <li><a href="haircare.html">Haircare</a></li>
+        <li><a href="contact us.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <p>Email: support@blus&bloom.com</p>
+      <p>Phone: +91 98765 43210</p>
+      <p>Address: 123 Beauty Lane, Glam City, India</p>
+    </div>
+
+    <div>
+      <h3>Policies</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Follow Us</h3>
+      <div style="font-size: 1.5rem;">
+        <a href="#"><i class="fab fa-facebook"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="#"><i class="fab fa-instagram"></i></a>&nbsp;&nbsp;
+        <a href="#"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <p>&copy; 2025 Glow Beauty. All rights reserved. Designed with 💖 by Blush & Bloom Team.</p>
+  </div>
+</footer>
+</body>
+</html>

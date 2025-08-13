@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Luxury Haircare - Glow & Radiance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      background: url('images/1.jpg') no-repeat center center;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 70px;
+      background-color: rgba(162, 35, 21, 0.9);
+      position: fixed;
+      width: 90%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      height: 60px;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 18px;
+      font-family: 'Josefin Sans', sans-serif;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-links a:hover {
+      background-color: #90210b;
+      border-radius: 8px;
+      transform: scale(1.1);
+    }
+    /* Cart and Logo */
+    .cart-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+    .cart {
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .cart i {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+    .cart:hover i {
+      transform: scale(1.1);
+    }
+    .logo img {
+      height: 125px;
+      width: 170px;
+      margin-top: 27px;
+      animation: bounce 3s infinite ease-in-out; /* Smooth bounce animation */
+      transition: transform 0.3s, filter 0.3s;
+    }
+    
+    /* Logo Hover Effect */
+    .logo img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0px 0px 15px rgba(255, 200, 150, 0.8)); /* Glow effect */
+    }
+    
+    /* Keyframes for Bounce Animation */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 18px;
+      padding: 20px;
+    }
+    .category-heading {
+      text-align: center;
+      color: #a94438;
+      font-family: 'Satisfy', cursive;
+      font-size: 32px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+      padding-bottom: 15px;
+      margin-top: 120px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    .category-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #a94438, transparent);
+    }
+    .category-tab {
+      width: 200px;
+      height: 250px;
+      background: linear-gradient(135deg, #fff, #f3ede5);
+      border: none;
+      border-radius: 15px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 18px;
+      color: #a94438;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    .category-tab:nth-child(1) { animation-delay: 0.3s; }
+    .category-tab:nth-child(2) { animation-delay: 0.3s; }
+    .category-tab:nth-child(3) { animation-delay: 0.3s; }
+    .category-tab img {
+      width: 180px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+    .category-tab:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .category-tab:hover img {
+      transform: scale(1.05);
+    }
+    .category-tab.active {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: linear-gradient(135deg, #fff, #f3ede5);
+      border-radius: 15px;
+      padding: 8px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+    .product-info {
+      width: 100%;
+      padding: 0 5px;
+    }
+    .product-name {
+      font-size: 16px;
+      color: #5a1a0a;
+      margin: 5px 0;
+      line-height: 1.2;
+    }
+    .product-price {
+      font-size: 18px;
+      color: #a94438;
+      font-weight: bold;
+      margin: 3px 0;
+    }
+    .product-rating {
+      color: #ffd700;
+      font-size: 16px;
+      margin: 3px 0;
+    }
+
+    .product-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 0;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      z-index: 1002;
+      width: 80%;
+      max-width: 800px;
+      overflow: hidden;
+    }
+    .popup-content {
+      display: flex;
+      gap: 0;
+    }
+    .popup-image {
+      width: 40%;
+      border-radius: 0;
+      object-fit: cover;
+    }
+    .popup-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 30px;
+      background: linear-gradient(135deg, #fff5f5, #ffe5e5);
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1001;
+    }
+    .popup-name {
+      font-size: 24px;
+      color: #5a1a0a;
+      margin: 0;
+    }
+    .popup-price {
+      font-size: 28px;
+      color: #a94438;
+      font-weight: bold;
+      margin: 0;
+    }
+    .popup-rating {
+      color: #ffd700;
+      font-size: 24px;
+      margin: 0;
+    }
+    .popup-description {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .popup-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .popup-features li {
+      margin: 8px 0;
+      color: #666;
+      font-size: 15px;
+    }
+    .popup-features li:before {
+      content: "•";
+      color: rgb(191, 21, 2), 21, 3);
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .popup-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+    .add-to-cart {
+      background-color: rgb(184, 22, 4);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      align-self: flex-start;
+    }
+    .add-to-cart:hover {
+      background-color: #90210b;
+      transform: scale(1.05);
+    }
+    .cart-notification {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #c10202;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 25px;
+      animation: slideIn 0.5s ease-out;
+      z-index: 1003;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    @media (max-width: 768px) {
+      .category-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+      .popup-content {
+        flex-direction: column;
+      }
+      .popup-image {
+        width: 100%;
+      }
+      .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 20px;
+      }
+    }
+    .login-button {
+      display: none;
+    }
+    .login-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #8e0209;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+      z-index: 1000;
+    }
+    .login-btn:hover {
+      background: #90210b;
+      transform: scale(1.05);
+    }
+    /* Notification */
+    .notification {
+      position: fixed;
+      bottom: -100px;
+      left: 20px;
+      background: #a94438;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1003;
+      transition: bottom 0.5s ease-in-out;
+    }
+
+    .notification.show {
+      bottom: 20px;
+    }
+
+    .notification i {
+      font-size: 20px;
+    }
+
+    .notification p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .notification .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+      padding: 0 5px;
+    }
+
+    .notification .close-btn:hover {
+      opacity: 0.8;
+    }
+
+    .hair-type-section h2 {
+      text-align: center;
+      color: #90210b;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .hair-type-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+    }
+
+    .hair-type-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .hair-type-card:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    .hair-type-card:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .hair-type-card:nth-child(3) {
+      animation-delay: 0.9s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="makeup.html">Makeup</a>
+        <a href="skincare.html">Skincare</a>
+        <a href="haircare.html">Haircare</a>
+        <a href="about.html">About</a>
+        <a href="contact us.html">Contact</a>
+      </div>
+    </div>
+    
+    <div class="cart-logo-container">
+      <a href="cart.html" class="cart">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+      
+      <div class="logo">
+        <img id="animatedLogo" src="images/LOGO1.png" alt="Blush & Bloom Logo">
+      </div>
+    </div>
+  </nav>
+
+  <div class="category-heading">Choose Your Type</div>
+  <div class="category-tabs">
+    <button class="category-tab active" onclick="showCategory('curly')">
+      <img src="images/curlyimg2.jpg" alt="Curly Hair">
+      Curly Hair
+    </button>
+    <button class="category-tab" onclick="showCategory('straight')">
+      <img src="images/straightimg.jpg" alt="Straight Hair">
+      Straight Hair
+    </button>
+    <button class="category-tab" onclick="showCategory('wavy')">
+      <img src="images/wavyimg2.jpg" alt="Wavy Hair">
+      Wavy Hair
+    </button>
+  </div>
+
+  <div id="curly" class="product-grid">
+    <div class="product-card" onclick="showProduct('curly-1')">
+      <img src="images/curldefcream.jpg" alt="Curl Definition Cream" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Definition Cream</h3>
+        <p class="product-price">₹1,499</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-2')">
+      <img src="images/curlenhancing.jpg" alt="Curl Enhancing Shampoo" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Enhancing Shampoo</h3>
+        <p class="product-price">₹899</p>
+        <div class="product-rating">★★★★★</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-3')">
+      <img src="images/curlstylingel.jpg" alt="Curl Styling Gel" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Styling Gel</h3>
+        <p class="product-price">₹799</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-4')">
+      <img src="images/curlmask.jpg" alt="Curl Moisturizing Mask" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Moisturizing Mask</h3>
+        <p class="product-price">₹1,299</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-5')">
+      <img src="images/curlrevioil.jpg" alt="Curl Revitalizing Oil" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Revitalizing Oil</h3>
+        <p class="product-price">₹1,199</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-6')">
+      <img src="images/curl6.jpg" alt="Curl Detangling Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Detangling Spray</h3>
+        <p class="product-price">₹699</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-7')">
+      <img src="images/curl7.jpg" alt="Curl Protein Treatment" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Protein Treatment</h3>
+        <p class="product-price">₹1,699</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-8')">
+      <img src="images/curl8.jpg" alt="Curl Styling Foam" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Styling Foam</h3>
+        <p class="product-price">₹849</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-9')">
+      <img src="images/curl9.jpg" alt="Curl Defining Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Defining Spray</h3>
+        <p class="product-price">₹899</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-10')">
+      <img src="images/curl10.jpg" alt="Curl Nourishing Oil" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Nourishing Oil</h3>
+        <p class="product-price">₹1,299</p>
+        <div class="product-rating">★★★★★</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-11')">
+      <img src="images/curl11.jpg" alt="Curl Styling Cream" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Styling Cream</h3>
+        <p class="product-price">₹999</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('curly-12')">
+      <img src="images/curl12.jpg" alt="Curl Hydrating Mist" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Curl Hydrating Mist</h3>
+        <p class="product-price">₹749</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="straight" class="product-grid" style="display: none;">
+    <div class="product-card" onclick="showProduct('straight-1')">
+      <img src="images/straight1.jpg" alt="Smooth & Shine Serum" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Smooth & Shine Serum</h3>
+        <p class="product-price">₹1,299</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-2')">
+      <img src="images/straight2.jpg" alt="Straightening Cream" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Straightening Cream</h3>
+        <p class="product-price">₹999</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-3')">
+      <img src="images/straight3.jpg" alt="Volume Boosting Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Volume Boosting Spray</h3>
+        <p class="product-price">₹799</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-4')">
+      <img src="images/straight4.jpg" alt="Anti-Frizz Treatment" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Anti-Frizz Treatment</h3>
+        <p class="product-price">₹1,199</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-5')">
+      <img src="images/straight5.jpg" alt="Straightening Balm" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Straightening Balm</h3>
+        <p class="product-price">₹1,499</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-6')">
+      <img src="images/straight6.jpg" alt="Heat Protectant Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Heat Protectant Spray</h3>
+        <p class="product-price">₹899</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-7')">
+      <img src="images/straight8.jpg" alt="Straight Hair Mask" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Straight Hair Mask</h3>
+        <p class="product-price">₹1,399</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-8')">
+      <img src="images/straight7.jpg" alt="Smoothing Serum" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Smoothing Serum</h3>
+        <p class="product-price">₹1,099</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-9')">
+      <img src="images/straight9.jpg" alt="Straightening Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Straightening Spray</h3>
+        <p class="product-price">₹899</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-10')">
+      <img src="images/straighthairoil.jpg" alt="Straight Hair Oil" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Straight Hair Oil</h3>
+        <p class="product-price">₹1,199</p>
+        <div class="product-rating">★★★★★</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-11')">
+      <img src="images/straighteningcream.jpg" alt="Straightening Cream" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Straightening Cream</h3>
+        <p class="product-price">₹1,099</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('straight-12')">
+      <img src="images/straighthairmist.jpg" alt="Straight Hair Mist" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Straight Hair Mist</h3>
+        <p class="product-price">₹799</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wavy" class="product-grid" style="display: none;">
+    <div class="product-card" onclick="showProduct('wavy-1')">
+      <img src="images/wavy1.jpg" alt="Wave Enhancing Mousse" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Enhancing Mousse</h3>
+        <p class="product-price">₹799</p>
+        <div class="product-rating">★★★★★</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-2')">
+      <img src="images/wavy2.jpg" alt="Wave Styling Cream" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Styling Cream</h3>
+        <p class="product-price">₹999</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-3')">
+      <img src="images/wavy3.jpg" alt="Wave Texturizing Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Texturizing Spray</h3>
+        <p class="product-price">₹849</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-4')">
+      <img src="images/wavy4.jpg" alt="Wave Hydrating Mist" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Hydrating Mist</h3>
+        <p class="product-price">₹699</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-5')">
+      <img src="images/wavy5.jpg" alt="Wave Defining Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Defining Spray</h3>
+        <p class="product-price">₹799</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-6')">
+      <img src="images/wavy7.jpg" alt="Wave Styling Balm" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Styling Balm</h3>
+        <p class="product-price">₹1,099</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-7')">
+      <img src="images/wavy6.jpg" alt="Wave Refreshing Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Refreshing Spray</h3>
+        <p class="product-price">₹749</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-8')">
+      <img src="images/wavy8.jpg" alt="Wave Styling Gel" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Styling Gel</h3>
+        <p class="product-price">₹899</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-9')">
+      <img src="images/wavy9.jpg" alt="Wave Styling Spray" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Styling Spray</h3>
+        <p class="product-price">₹849</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-10')">
+      <img src="images/wavy10.jpg" alt="Wave Nourishing Oil" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Nourishing Oil</h3>
+        <p class="product-price">₹1,099</p>
+        <div class="product-rating">★★★★★</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-11')">
+      <img src="images/wavy11.jpg" alt="Wave Styling Cream" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Styling Cream</h3>
+        <p class="product-price">₹949</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="product-card" onclick="showProduct('wavy-12')">
+      <img src="images/wavy12.jpg" alt="Wave Hydrating Mist" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Wave Hydrating Mist</h3>
+        <p class="product-price">₹699</p>
+        <div class="product-rating">★★★★☆</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="popup-overlay"></div>
+  <div id="product-popup" class="product-popup">
+    <span class="popup-close" onclick="closePopup()">&times;</span>
+    <div class="popup-content">
+      <img src="" alt="Product Image" class="popup-image">
+      <div class="popup-info">
+        <h2 class="popup-name"></h2>
+        <p class="popup-price"></p>
+        <div class="popup-rating"></div>
+        <p class="popup-description"></p>
+        <ul class="popup-features">
+          <li>Natural ingredients</li>
+          <li>Suitable for all hair types</li>
+          <li>Long-lasting results</li>
+          <li>No harmful chemicals</li>
+        </ul>
+        <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="cart-notification" class="cart-notification">
+    Added to cart!
+  </div>
+
+  <!-- Add this for notification -->
+  <div class="notification" id="notification">
+    <i class="fas fa-check-circle"></i>
+    <p>Item added to cart successfully!</p>
+    <button class="close-btn" onclick="closeNotification()">&times;</button>
+  </div>
+
+  <!-- Add login button -->
+  <a href="login.html" class="login-btn">Login</a>
+
+  <script>
+    const productDetails = {
+      'curly-1': {
+        description: "Our signature curl definition cream enhances natural curl pattern while reducing frizz. Infused with argan oil and shea butter for maximum hydration.",
+        features: [
+          "Defines curls without crunchiness",
+          "Reduces frizz and flyaways",
+          "Provides long-lasting hold",
+          "Suitable for all curl types"
+        ]
+      },
+      'curly-2': {
+        description: "Gentle cleansing shampoo specifically formulated for curly hair. Maintains natural oils while removing buildup and enhancing curl definition.",
+        features: [
+          "Sulfate-free formula",
+          "Adds natural shine",
+          "Prevents dryness",
+          "Enhances curl pattern"
+        ]
+      },
+      'curly-3': {
+        description: "Strong-hold styling gel that defines curls without stiffness. Provides excellent control while maintaining natural movement.",
+        features: [
+          "Flexible hold",
+          "No white residue",
+          "Enhances curl definition",
+          "Controls frizz"
+        ]
+      },
+      'curly-4': {
+        description: "Deep conditioning mask that provides intense hydration for dry, curly hair. Restores moisture and improves curl elasticity.",
+        features: [
+          "Deep hydration",
+          "Repairs damaged curls",
+          "Improves elasticity",
+          "Reduces breakage"
+        ]
+      },
+      'curly-5': {
+        description: "Revitalizing oil blend that nourishes and protects curly hair. Adds shine and reduces frizz while maintaining curl definition.",
+        features: [
+          "Natural oil blend",
+          "Adds shine",
+          "Reduces frizz",
+          "Protects from damage"
+        ]
+      },
+      'curly-6': {
+        description: "Easy-to-use detangling spray that makes combing through curly hair a breeze. Prevents breakage and maintains curl pattern.",
+        features: [
+          "Easy detangling",
+          "Prevents breakage",
+          "Adds slip",
+          "Maintains curl pattern"
+        ]
+      },
+      'curly-7': {
+        description: "Protein treatment that strengthens and repairs damaged curls. Restores elasticity and improves curl definition.",
+        features: [
+          "Strengthens hair",
+          "Repairs damage",
+          "Improves elasticity",
+          "Enhances curl pattern"
+        ]
+      },
+      'curly-8': {
+        description: "Lightweight styling foam that adds volume and definition to curly hair. Provides flexible hold without weighing down curls.",
+        features: [
+          "Lightweight formula",
+          "Adds volume",
+          "Flexible hold",
+          "No crunchiness"
+        ]
+      },
+      'curly-9': {
+        description: "Defining spray that enhances natural curl pattern while adding shine. Perfect for refreshing curls between washes.",
+        features: [
+          "Enhances curl pattern",
+          "Adds shine",
+          "Refreshes curls",
+          "Lightweight formula"
+        ]
+      },
+      'curly-10': {
+        description: "Nourishing oil blend that deeply conditions curly hair. Provides intense hydration and improves curl definition.",
+        features: [
+          "Deep conditioning",
+          "Improves curl definition",
+          "Adds shine",
+          "Reduces frizz"
+        ]
+      },
+      'curly-11': {
+        description: "Styling cream that defines and enhances natural curls. Provides medium hold with natural movement.",
+        features: [
+          "Medium hold",
+          "Natural movement",
+          "Defines curls",
+          "Controls frizz"
+        ]
+      },
+      'curly-12': {
+        description: "Hydrating mist that refreshes and moisturizes curly hair. Perfect for daily use and curl refreshment.",
+        features: [
+          "Refreshes curls",
+          "Adds moisture",
+          "Lightweight formula",
+          "Daily use"
+        ]
+      },
+
+      'straight-1': {
+        description: "Luxurious serum that adds incredible shine and smoothness to straight hair. Reduces static and flyaways for a polished look.",
+        features: [
+          "Weightless formula",
+          "Heat protection up to 450°F",
+          "Adds mirror-like shine",
+          "Controls static electricity"
+        ]
+      },
+      'straight-2': {
+        description: "Advanced straightening cream that protects hair from heat damage while providing smooth, sleek results. Perfect for daily use.",
+        features: [
+          "Heat protection technology",
+          "Reduces styling time",
+          "Adds natural shine",
+          "Controls frizz"
+        ]
+      },
+      'straight-3': {
+        description: "Volume-boosting spray that adds body and lift to straight hair. Creates natural-looking volume without stiffness.",
+        features: [
+          "Adds volume",
+          "Lightweight formula",
+          "Natural-looking lift",
+          "No stiffness"
+        ]
+      },
+      'straight-4': {
+        description: "Anti-frizz treatment that smooths and protects straight hair. Controls flyaways and adds shine.",
+        features: [
+          "Controls frizz",
+          "Adds shine",
+          "Smooths hair",
+          "Protects from humidity"
+        ]
+      },
+      'straight-5': {
+        description: "Straightening balm that provides sleek, smooth results. Reduces styling time and protects from heat damage.",
+        features: [
+          "Sleek results",
+          "Heat protection",
+          "Reduces styling time",
+          "Adds shine"
+        ]
+      },
+      'straight-6': {
+        description: "Heat protectant spray that shields hair from thermal damage. Provides up to 450°F protection.",
+        features: [
+          "450°F heat protection",
+          "Lightweight formula",
+          "No buildup",
+          "Adds shine"
+        ]
+      },
+      'straight-7': {
+        description: "Deep conditioning mask for straight hair. Provides intense hydration and smoothness.",
+        features: [
+          "Deep hydration",
+          "Adds smoothness",
+          "Repairs damage",
+          "Improves shine"
+        ]
+      },
+      'straight-8': {
+        description: "Smoothing serum that adds shine and reduces frizz. Perfect for daily use.",
+        features: [
+          "Adds shine",
+          "Controls frizz",
+          "Lightweight formula",
+          "Daily use"
+        ]
+      },
+      'straight-9': {
+        description: "Straightening spray that provides smooth, sleek results. Reduces styling time and adds shine.",
+        features: [
+          "Smooth results",
+          "Reduces styling time",
+          "Adds shine",
+          "Controls frizz"
+        ]
+      },
+      'straight-10': {
+        description: "Nourishing oil for straight hair. Adds shine and smoothness while protecting from damage.",
+        features: [
+          "Adds shine",
+          "Smooths hair",
+          "Protects from damage",
+          "Lightweight formula"
+        ]
+      },
+      'straight-11': {
+        description: "Straightening cream that provides sleek results. Protects from heat damage and adds shine.",
+        features: [
+          "Sleek results",
+          "Heat protection",
+          "Adds shine",
+          "Controls frizz"
+        ]
+      },
+      'straight-12': {
+        description: "Hydrating mist for straight hair. Refreshes and adds shine between washes.",
+        features: [
+          "Refreshes hair",
+          "Adds shine",
+          "Lightweight formula",
+          "Daily use"
+        ]
+      },
+
+      'wavy-1': {
+        description: "Lightweight mousse that enhances natural waves while adding volume and definition. Perfect for creating beachy waves or defined curls.",
+        features: [
+          "Non-sticky formula",
+          "Adds natural volume",
+          "Defines wave pattern",
+          "Long-lasting hold"
+        ]
+      },
+      'wavy-2': {
+        description: "Cream-based styling product that enhances natural waves while providing flexible hold. Ideal for creating defined, bouncy waves.",
+        features: [
+          "Flexible hold",
+          "Adds natural movement",
+          "Controls frizz",
+          "Suitable for all wave types"
+        ]
+      },
+      'wavy-3': {
+        description: "Texturizing spray that adds definition and volume to wavy hair. Creates natural-looking waves with flexible hold.",
+        features: [
+          "Adds texture",
+          "Defines waves",
+          "Flexible hold",
+          "Natural-looking results"
+        ]
+      },
+      'wavy-4': {
+        description: "Hydrating mist that refreshes and defines wavy hair. Perfect for daily use and wave enhancement.",
+        features: [
+          "Refreshes waves",
+          "Adds definition",
+          "Lightweight formula",
+          "Daily use"
+        ]
+      },
+      'wavy-5': {
+        description: "Wave-defining spray that enhances natural wave pattern. Provides flexible hold and adds shine.",
+        features: [
+          "Enhances waves",
+          "Flexible hold",
+          "Adds shine",
+          "Controls frizz"
+        ]
+      },
+      'wavy-6': {
+        description: "Styling balm that defines and enhances natural waves. Provides medium hold with natural movement.",
+        features: [
+          "Medium hold",
+          "Natural movement",
+          "Defines waves",
+          "Controls frizz"
+        ]
+      },
+      'wavy-7': {
+        description: "Refreshing spray that revives waves between washes. Adds definition and shine.",
+        features: [
+          "Revives waves",
+          "Adds definition",
+          "Adds shine",
+          "Lightweight formula"
+        ]
+      },
+      'wavy-8': {
+        description: "Styling gel that provides flexible hold for wavy hair. Defines waves without stiffness.",
+        features: [
+          "Flexible hold",
+          "Defines waves",
+          "No stiffness",
+          "Controls frizz"
+        ]
+      },
+      'wavy-9': {
+        description: "Styling spray that enhances natural waves. Adds volume and definition with flexible hold.",
+        features: [
+          "Enhances waves",
+          "Adds volume",
+          "Flexible hold",
+          "Natural-looking results"
+        ]
+      },
+      'wavy-10': {
+        description: "Nourishing oil that enhances natural waves. Adds shine and definition while controlling frizz.",
+        features: [
+          "Adds shine",
+          "Defines waves",
+          "Controls frizz",
+          "Lightweight formula"
+        ]
+      },
+      'wavy-11': {
+        description: "Styling cream that defines and enhances natural waves. Provides medium hold with natural movement.",
+        features: [
+          "Medium hold",
+          "Natural movement",
+          "Defines waves",
+          "Controls frizz"
+        ]
+      },
+      'wavy-12': {
+        description: "Hydrating mist that refreshes and defines wavy hair. Perfect for daily use and wave enhancement.",
+        features: [
+          "Refreshes waves",
+          "Adds definition",
+          "Lightweight formula",
+          "Daily use"
+        ]
+      }
+    };
+
+    function showCategory(category) {
+      document.querySelectorAll('.product-grid').forEach(grid => {
+        grid.style.display = 'none';
+      });
+      document.getElementById(category).style.display = 'grid';
+      
+      document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    function showProduct(productId) {
+      const popup = document.getElementById('product-popup');
+      const overlay = document.getElementById('popup-overlay');
+      const product = document.querySelector(`[onclick="showProduct('${productId}')"]`);
+      
+      // Get product details
+      const name = product.querySelector('.product-name').textContent;
+      const price = product.querySelector('.product-price').textContent;
+      const rating = product.querySelector('.product-rating').innerHTML;
+      const image = product.querySelector('.product-image').src;
+      
+      // Get specific product details
+      const details = productDetails[productId] || {
+        description: "Premium haircare product designed for optimal results. Made with natural ingredients and advanced technology.",
+        features: [
+          "Natural ingredients",
+          "Suitable for all hair types",
+          "Long-lasting results",
+          "No harmful chemicals"
+        ]
+      };
+      
+      // Update popup content
+      popup.querySelector('.popup-image').src = image;
+      popup.querySelector('.popup-name').textContent = name;
+      popup.querySelector('.popup-price').textContent = price;
+      popup.querySelector('.popup-rating').innerHTML = rating;
+      popup.querySelector('.popup-description').textContent = details.description;
+      
+      // Update features list
+      const featuresList = popup.querySelector('.popup-features');
+      featuresList.innerHTML = details.features.map(feature => `<li>${feature}</li>`).join('');
+      
+      // Show popup and overlay
+      popup.style.display = 'block';
+      overlay.style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('product-popup').style.display = 'none';
+      document.getElementById('popup-overlay').style.display = 'none';
+    }
+
+    function addToCart() {
+      const popup = document.getElementById('product-popup');
+      const name = popup.querySelector('.popup-name').textContent;
+      const price = popup.querySelector('.popup-price').textContent.replace('₹', '');
+      
+      // Show notification first
+      showNotification();
+      
+      // Then add to cart
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ 
+        name: name, 
+        price: parseInt(price), 
+        quantity: 1 
+      });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Update cart count
+      updateCartCount();
+      
+      // Close popup
+      closePopup();
+    }
+
+    // Close popup when clicking outside
+    window.onclick = function(event) {
+      const popup = document.getElementById('product-popup');
+      const overlay = document.getElementById('popup-overlay');
+      if (event.target == overlay) {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+      }
+    }
+
+    // Update notification functions
+    function showNotification() {
+      const notification = document.getElementById('notification');
+      const popup = document.getElementById('product-popup');
+      const name = popup.querySelector('.popup-name').textContent;
+      notification.querySelector('p').textContent = `${name} added to cart successfully!`;
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    function closeNotification() {
+      const notification = document.getElementById('notification');
+      notification.classList.remove('show');
+    }
+
+    // Update cart count in navigation
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartCount = document.querySelector('.cart');
+      if (cartCount) {
+        cartCount.textContent = `🛒 ${totalItems}`;
+      }
+    }
+
+    // Initial cart count update
+    updateCartCount();
+  </script>
+</body>
+</html>

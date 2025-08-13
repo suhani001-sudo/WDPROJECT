@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Makeup E-Commerce</title>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Navigation Bar Styling */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 70px;
+      background-color: rgba(162, 35, 21, 0.9);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      position: fixed;
+      width: 90%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      height: 60px;
+    }
+    .shop-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #8e0209;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 18px;
+      font-family: 'Josefin Sans', sans-serif;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-links a:hover {
+      background-color: #90210b;
+      border-radius: 8px;
+      transform: scale(1.1);
+    }
+    .cart-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+    .cart {
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .cart i {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+    .cart:hover i {
+      transform: scale(1.1);
+    }
+    .logo img {
+      height: 125px;
+      width: 170px;
+      margin-top: 27px;
+      animation: bounce 3s infinite ease-in-out;
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .logo img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0px 0px 15px rgba(255, 200, 150, 0.8));
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    body {
+      background-size: cover;
+      background-attachment: fixed;
+      color: white;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    .product-category {
+      margin-top: 80px;
+      text-align: center;
+      padding: 10px;
+    }
+    .product-category h2 {
+      font-size: 36px;
+      color: #8b1e0d;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      font-family: 'Josefin Sans', sans-serif;
+      margin-bottom: 20px;
+    }
+    .product-list {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product-item {
+      background: linear-gradient(135deg, #fff5f8, #ffe6ea);
+      color: #000;
+      padding: 12px;
+      border-radius: 15px;
+      text-align: center;
+      width: 220px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 300px;
+      margin: 5px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .product-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    }
+    .product-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .product-item:hover img {
+      transform: scale(1.05);
+    }
+    .product-item h3 {
+      font-size: 16px;
+      margin: 10px 0 5px;
+      color: #8b1e0d;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    .rating {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px 8px;
+      border-radius: 15px;
+      color: #ffd700;
+      font-size: 12px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .rating i {
+      margin-right: 1px;
+    }
+    .rating span {
+      color: #5a1a0a;
+      margin-left: 3px;
+      font-weight: bold;
+    }
+    .product-item p {
+      font-size: 15px;
+      margin: 5px 0;
+      color: #5a1a0a;
+      font-weight: bold;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    .product-back {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .product-item:hover .product-back {
+      transform: translateY(0);
+    }
+    .product-back p {
+      font-size: 12px;
+      color: #5a1a0a;
+      margin: 0;
+      line-height: 1.3;
+    }
+    /* Floating Modal Styling */
+    #floatingContainer {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fef0f0;
+      padding: 20px;
+      border-radius: 20px;
+      z-index: 2000;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      width: 90%;
+      max-width: 700px;
+      color: #6b0202;
+    }
+    #floatingContainerContent {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    #modal-img {
+      width: 180px;
+      border-radius: 10px;
+    }
+    #modal-details {
+      flex: 1;
+      text-align: left;
+    }
+    #modal-details h3 {
+      font-size: 24px;
+      margin: 5px 0;
+    }
+    #modal-details p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+    #addToCartBtn {
+      background-color: #a91f1f;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #addToCartBtn:hover {
+      background-color: #840d0d;
+    }
+    #closeBtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #a91f1f;
+    }
+    #cartPopup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      animation: fadeOut 2s ease-out forwards;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+    /* Notification */
+    .notification {
+      position: fixed;
+      bottom: -100px;
+      left: 20px;
+      background: #a94438;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1003;
+      transition: bottom 0.5s ease-in-out;
+    }
+    .notification.show {
+      bottom: 20px;
+    }
+    .notification i {
+      font-size: 20px;
+    }
+    .notification p {
+      margin: 0;
+      font-size: 16px;
+    }
+    .notification .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+      padding: 0 5px;
+    }
+    .notification .close-btn:hover {
+      opacity: 0.8;
+    }
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #a94438;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: none;
+      z-index: 1000;
+      animation: slideIn 0.5s ease-out;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    .toast.show {
+      display: block;
+    }
+    /* Featured Products Section */
+    .featured-section {
+      margin-top: 130px;
+      padding: 30px 20px;
+      text-align: center;
+      background: rgba(244, 228, 215, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+    }
+    .featured-section h2 {
+      font-size: 36px;
+      color: #8b1e0d;
+      margin-bottom: 30px;
+      font-family: 'Satisfy', cursive;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .featured-products {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .featured-product {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px;
+      border-radius: 15px;
+      width: 230px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(139, 30, 13, 0.1);
+    }
+    .featured-product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 1);
+    }
+    .featured-product img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .featured-product h3 {
+      font-size: 18px;
+      color: #8b1e0d;
+      margin: 10px 0;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    .featured-product p {
+      font-size: 16px;
+      color: #5a1a0a;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .featured-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #8b1e0d;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .featured-rating {
+      color: #ffd700;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .featured-rating i {
+      margin-right: 2px;
+    }
+  </style>
+</head>
+
+<body background="images/1.jpg">
+  <nav>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="makeup.html">Makeup</a>
+        <a href="skincare.html">Skincare</a>
+        <a href="haircare.html">Haircare</a>
+        <a href="about.html">About</a>
+        <a href="contact us.html">Contact</a>
+      </div>
+    </div>
+    
+    <div class="cart-logo-container">
+      <a href="cart.html" class="cart">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+      
+      <div class="logo">
+        <img id="animatedLogo" src="images/LOGO1.png" alt="Blush & Bloom Logo">
+      </div>
+    </div>
+    
+  </nav>
+
+  <!-- Featured Products Section -->
+  <section class="featured-section">
+    <h2>Best Seller</h2>
+    <div class="featured-products">
+      <div class="featured-product" onclick="openCard('images/crylipgloss.jpg', 'Crystal Lip Gloss', '₹499', '⭐⭐⭐⭐⭐', 'Shimmering lip gloss with long-lasting shine and hydration')">
+        <span class="featured-badge">Best Seller</span>
+        <img src="images/crylipgloss.jpg" alt="Crystal Lip Gloss">
+        <h3>Crystal Lip Gloss</h3>
+        <p>₹499</p>
+        <div class="featured-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          <span>(4.5)</span>
+        </div>
+      </div>
+
+      <div class="featured-product" onclick="openCard('images/hyfaceserum.jpg', 'Hydrating Face Serum', '₹999', '⭐⭐⭐⭐⭐', 'Deep hydration serum for smooth and plump skin')">
+        <span class="featured-badge">Popular</span>
+        <img src="images/hyfaceserum.jpg" alt="Hydrating Face Serum">
+        <h3>Hydrating Face Serum</h3>
+        <p>₹999</p>
+        <div class="featured-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <span>(5.0)</span>
+        </div>
+      </div>
+
+      <div class="featured-product" onclick="openCard('images/rosblushpal.jpg', 'Rosy Blush Palette', '₹799', '⭐⭐⭐⭐', 'Versatile blush palette with multiple shades')">
+        <span class="featured-badge">Trending</span>
+        <img src="images/rosblushpal.jpg" alt="Rosy Blush Palette">
+        <h3>Rosy Blush Palette</h3>
+        <p>₹799</p>
+        <div class="featured-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <span>(4.0)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product listings -->
+  <div class="product-category">
+    <h2>Foundation</h2>
+    <div class="product-list">
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/f1.jpg">
+          <h3>Maybelline Fit Me</h3>
+          <p>₹750</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <img src="images/f2.jpg">
+          <h3>Fenty Beauty Pro</h3>
+          <p>₹3,000</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>4.0</span>
+          </div>
+          <img src="images/f3.jpg">
+          <h3>Estée Lauder</h3>
+          <p>₹3,500</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/f4.jpg">
+          <h3>L'Oréal True Match</h3>
+          <p>₹999</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="product-category">
+    <h2>Blush</h2>
+    <div class="product-list">
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <img src="images/b1.jpg">
+          <h3>NARS Orgasm</h3>
+          <p>₹3,200</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>4.0</span>
+          </div>
+          <img src="images/b2.jpg">
+          <h3>Milani Baked Blush</h3>
+          <p>₹1,000</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/b3.jpg">
+          <h3>MAC Powder Blush</h3>
+          <p>₹2,500</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>4.0</span>
+          </div>
+          <img src="images/b4.jpg">
+          <h3>Maybelline Fit Me Blush</h3>
+          <p>₹599</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="product-category">
+    <h2>Eyeliners</h2>
+    <div class="product-list">
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/el1.jpg">
+          <h3>Kat Von D Tattoo Liner</h3>
+          <p>₹1,800</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <img src="images/el2.jpg">
+          <h3>Stila Stay All Day</h3>
+          <p>₹2,200</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>4.0</span>
+          </div>
+          <img src="images/el3.jpg">
+          <h3>Maybelline Hyper Gel</h3>
+          <p>₹700</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/el4.jpg">
+          <h3>Lakmé Eyeconic Kajal</h3>
+          <p>₹450</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="product-category">
+    <h2>Eyeshadow Palettes</h2>
+    <div class="product-list">
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <img src="images/es1.jpg">
+          <h3>Huda Beauty Nude</h3>
+          <p>₹5,000</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/es2.jpg">
+          <h3>Morphe 35O</h3>
+          <p>₹3,500</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>4.0</span>
+          </div>
+          <img src="images/es3.jpg">
+          <h3>Urban Decay Heat</h3>
+          <p>₹4,200</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/es4.jpg">
+          <h3>NYX Ultimate</h3>
+          <p>₹1,800</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="product-category">
+    <h2>Lipsticks</h2>
+    <div class="product-list">
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <img src="images/l1.jpg">
+          <h3>MAC Ruby Woo</h3>
+          <p>₹1,700</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/l2.jpg">
+          <h3>Huda Beauty Power Bullet</h3>
+          <p>₹2,300</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>4.0</span>
+          </div>
+          <img src="images/l3.jpg">
+          <h3>Maybelline SuperStay Matte</h3>
+          <p>₹699</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/li4.jpg">
+          <h3>L'Oréal Color Riche</h3>
+          <p>₹999</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="product-category">
+    <h2>Mascara</h2>
+    <div class="product-list">
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <img src="images/mas1.jpg">
+          <h3>Too Faced Better Than Sex</h3>
+          <p>₹2,000</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/mas2.jpg">
+          <h3>Maybelline Lash Sensational</h3>
+          <p>₹550</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>4.0</span>
+          </div>
+          <img src="images/mas3.jpg">
+          <h3>L'Oréal Voluminous Lash Paradise</h3>
+          <p>₹899</p>
+        </div>
+        <div class="product-item">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <img src="images/mas4.jpg">
+          <h3>Benefit They're Real!</h3>
+          <p>₹1,950</p>
+        </div>
+    </div>
+  </div>
+
+  <a href="login.html" class="shop-btn">Login-in</a>
+ 
+  <!-- Floating Modal -->
+  <div id="floatingContainer">
+    <span id="closeBtn">&times;</span>
+    <div id="floatingContainerContent">
+      <img id="modal-img" src="" alt="Product Image" />
+      <div id="modal-details">
+        <h3 id="modal-name">Product Name</h3>
+        <p id="modal-price">₹0</p>
+        <p id="modal-rating">Rating: ⭐⭐⭐⭐☆</p>
+        <p id="modal-info">Details here...</p>
+        <button id="addToCartBtn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Cart Popup -->
+  <div id="cart-toast" class="toast">
+    Item added to cart! 🛒
+  </div>
+
+  <!-- Add this for notification -->
+  <div class="notification" id="notification">
+    <i class="fas fa-check-circle"></i>
+    <p>Item added to cart successfully!</p>
+    <button class="close-btn" onclick="closeNotification()">&times;</button>
+  </div>
+
+  <script>
+    const productItems = document.querySelectorAll('.product-item');
+    const floatingContainer = document.getElementById('floatingContainer');
+    const modalImg = document.getElementById('modal-img');
+    const modalName = document.getElementById('modal-name');
+    const modalPrice = document.getElementById('modal-price');
+    const modalInfo = document.getElementById('modal-info');
+    const closeBtn = document.getElementById('closeBtn');
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const cartToast = document.getElementById('cart-toast');
+
+    productItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const imgSrc = item.querySelector('img').src;
+        const name = item.querySelector('h3').textContent;
+        const price = item.querySelector('p').textContent;
+        const info = item.querySelector('.product-back p')?.textContent || "No details available.";
+
+        modalImg.src = imgSrc;
+        modalName.textContent = name;
+        modalPrice.textContent = price;
+        modalInfo.textContent = info;
+
+        floatingContainer.style.display = 'block';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      floatingContainer.style.display = 'none';
+    });
+
+    addToCartBtn.addEventListener('click', () => {
+      const name = modalName.textContent;
+      const price = modalPrice.textContent.replace('₹', '');
+      
+      // Add to cart
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItem = cart.find(item => item.name === name);
+      
+      if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+      } else {
+        cart.push({ 
+          name: name, 
+          price: parseInt(price), 
+          quantity: 1 
+        });
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Show toast notification
+      cartToast.classList.add('show');
+      setTimeout(() => {
+        cartToast.classList.remove('show');
+      }, 2000);
+      
+      // Update cart count
+      updateCartCount();
+      
+      // Close modal
+      floatingContainer.style.display = 'none';
+    });
+
+    // Update cart count in navigation
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const cartCount = document.querySelector('.cart');
+      if (cartCount) {
+        cartCount.textContent = `🛒 ${totalItems}`;
+      }
+    }
+
+    // Initial cart count update
+    updateCartCount();
+
+    // Update notification functions
+    function showNotification() {
+      const notification = document.getElementById('notification');
+      const name = document.getElementById('modal-name').textContent;
+      notification.querySelector('p').textContent = `${name} added to cart successfully!`;
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    function closeNotification() {
+      const notification = document.getElementById('notification');
+      notification.classList.remove('show');
+    }
+
+    // Update the openCard function to handle featured products
+    function openCard(img, name, price, rating, info) {
+      const floatingContainer = document.getElementById('floatingContainer');
+      const modalImg = document.getElementById('modal-img');
+      const modalName = document.getElementById('modal-name');
+      const modalPrice = document.getElementById('modal-price');
+      const modalRating = document.getElementById('modal-rating');
+      const modalInfo = document.getElementById('modal-info');
+
+      modalImg.src = img;
+      modalName.textContent = name;
+      modalPrice.textContent = price;
+      modalRating.textContent = rating;
+      modalInfo.textContent = info;
+
+      floatingContainer.style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

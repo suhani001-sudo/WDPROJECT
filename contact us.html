@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us </title>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+  
+    body {
+      margin: 0;
+      font-family: 'Josefin Sans', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+  
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 70px;
+      background-color: rgba(162, 35, 21, 0.95);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      height: 80px;
+    }
+  
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 18px;
+      font-family: 'Josefin Sans', sans-serif;
+      transition: background 0.3s, transform 0.2s;
+    }
+  
+    .nav-links a:hover {
+      background-color: #90210b;
+      border-radius: 8px;
+      transform: scale(1.1);
+    }
+  
+    .cart-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+  
+    .cart {
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  
+    .cart i {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+  
+    .cart:hover i {
+      transform: scale(1.1);
+    }
+  
+    .logo img {
+      height: 125px;
+      width: 170px;
+      margin-top: 27px;
+      animation: bounce 3s infinite ease-in-out;
+      transition: transform 0.3s, filter 0.3s;
+    }
+  
+    .logo img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0px 0px 15px rgba(255, 200, 150, 0.8));
+    }
+  
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  
+    .contact-us-wrapper {
+      padding-top: 40px; /* reduced from 120px */
+      margin-bottom: 60px; /* added space below forms */
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .contact-us-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+  
+    .contact-us-header h2 {
+      font-size: 34px;
+      color: #c91c2a;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.3s;
+    }
+    
+    .contact-us-header p {
+      color: #74030d;
+      font-size: 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.6s;
+    }
+  
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+  
+    .contact-form {
+      flex: 1 1 350px;
+      background: #cb7272;
+      padding: 1.2rem;
+      width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(103, 2, 2, 0.1);
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.9s;
+    }
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 7px;
+      font-size: 1rem;
+      color: black;
+    }
+  
+    .contact-form input,
+    .contact-form textarea {
+      width: 90%;
+      padding: 8px; /* reduced */
+      margin-bottom: 1rem;
+      border: 2px solid #c91c2a;
+      border-radius: 10px;
+      font-size: 0.95rem; /* reduced */
+      font-family: 'Josefin Sans', sans-serif;
+      background-color: #ffebeb;
+    }
+  
+    .contact-form button {
+      background-color: #c31120;
+      color: white;
+      border: none;
+      padding: 10px 24px; /* reduced */
+      font-size: 1rem; /* reduced */
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: block;
+      margin: 0 auto;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+  
+    .contact-form button:hover {
+      background-color: #99041b;
+      transform: scale(1.1);
+    }
+  
+    .contact-info {
+      flex: 1 1 300px;
+      background: linear-gradient(145deg, #fff6f6, #ffe3e8);
+      padding: 1.2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 18px rgba(190, 50, 78, 0.15);
+      font-family: 'Josefin Sans', sans-serif;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 1.2s;
+    }
+  
+    .contact-info h3 {
+      margin-bottom: 1rem;
+      color: #c91c2a;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+  
+    .contact-info p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      text-align: center;
+    }
+  
+    .social-links {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+  
+    .social-links a {
+      font-size: 1.6rem;
+      color: #d8102b;
+      transition: transform 0.2s;
+    }
+  
+    .social-links a:hover {
+      transform: scale(1.2);
+    }
+  
+    footer {
+      background-color: rgba(162, 35, 21, 0.8);
+      color: white;
+      padding: 7px 10px; /* reduced vertical space */
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.95rem;
+    }
+  
+    footer a {
+      color: rgb(254, 251, 251);
+      text-decoration: none;
+    }
+  
+    footer a:hover {
+      text-decoration: underline;
+    }
+  
+    footer .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem; /* reduced gap */
+      max-width: 1200px;
+      margin: auto;
+    }
+  
+    footer h3 {
+      color: #f8eeef;
+      font-size: 1.1rem; /* reduced */
+    }
+  
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    footer ul li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  
+    footer .footer-note {
+      text-align: center;
+      margin-top: 4px;
+      font-size: 0.85rem;
+      border-top: 1px solid rgb(251, 189, 189);
+      padding-top: 5px;
+    }
+  
+    footer .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+  
+    footer .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+      text-decoration: none;
+    }
+  
+    footer .social-links a:hover {
+      transform: scale(1.2);
+      color: #ffebeb;
+    }
+  
+    footer .follow-us {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    footer .follow-us h3 {
+      margin-bottom: 10px;
+    }
+  
+    @media (max-width: 768px) {
+      .contact-container {
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      nav {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 20px;
+      }
+  
+      .logo img {
+        height: 50px;
+      }
+  
+      .contact-form,
+      .contact-info {
+        width: 90%;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #90210b;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .login-button:hover {
+      background-color: #a94438;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .thank-you-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 1002;
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .thank-you-popup.show {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .thank-you-popup h3 {
+      color: #90210b;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .thank-you-popup p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .thank-you-popup button {
+      background-color: #90210b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .thank-you-popup button:hover {
+      background-color: #a94438;
+      transform: scale(1.05);
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      z-index: 1001;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .popup-overlay.show {
+      display: block;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+   
+</head>
+
+<body background="images/1.jpg">
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="makeup.html">Makeup</a>
+      <a href="skincare.html">Skincare</a>
+      <a href="haircare.html">Haircare</a>
+      <a href="about.html">About</a>
+      <a href="contact us.html">Contact</a>
+    </div>
+
+    <div class="cart-logo-container">
+      <a href="cart.html" class="cart">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+      <div class="logo">
+        <img id="animatedLogo" src="images/LOGO1.png" alt="Blush & Bloom Logo">
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    const logo = document.getElementById("animatedLogo");
+    logo.addEventListener("mouseover", () => {
+      logo.style.animation = "none";
+      logo.style.transform = "rotate(10deg) scale(1.2)";
+    });
+    logo.addEventListener("mouseout", () => {
+      logo.style.animation = "bounce 3s infinite ease-in-out";
+      logo.style.transform = "scale(1) rotate(0deg)";
+    });
+  </script>
+
+  <!-- Contact Section -->
+  <div class="contact-us-wrapper">
+    <div class="contact-us-header">
+      <h2>Contact Us</h2>
+      <p>We'd love to hear from you! Whether you have questions, feedback, or just want to say hi, drop us a message.</p>
+    </div>
+
+    <div class="contact-container">
+      <form class="contact-form">
+        <fieldset>
+          <label for="name">Name:</label>
+          <input id="name" type="text" placeholder="Your Name" required>
+
+          <label for="email">E-mail:</label>
+          <input id="email" type="email" placeholder="abc@gmail.com" required>
+
+          <label for="subject">Subject:</label>
+          <input id="subject" type="text" placeholder="Subject">
+
+          <label for="message">Message:</label>
+          <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
+
+          <button type="submit">Send Message</button>
+        </fieldset>
+      </form>
+
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p><strong>Email:</strong> support@glowbeauty.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Address:</strong> 123 Beauty Lane, Glam City, India</p>
+        <p><strong>Working Hours:</strong><br>Mon–Fri: 9am–6pm</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Pages</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="makeup.html">Makeup</a></li>
+          <li><a href="skincare.html">Skincare</a></li>
+          <li><a href="haircare.html">Haircare</a></li>
+          <li><a href="contact us.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <p>Email: support@blus&bloom.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Address: 123 Beauty Lane, Glam City, India</p>
+      </div>
+
+      <div>
+        <h3>Policies</h3>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Follow Us</h3>
+        <div style="font-size: 1.5rem;">
+          <a href="#"><i class="fab fa-facebook"></i></a>&nbsp;&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-instagram"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fab fa-twitter"></i></a>&nbsp;&nbsp;
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <p>&copy; 2025 Glow Beauty. All rights reserved. Designed with 💖 by Blush & Bloom Team.</p>
+    </div>
+  </footer>
+
+  <div class="popup-overlay" id="thank-you-overlay"></div>
+  <div class="thank-you-popup" id="thank-you-popup">
+    <h3>Thank You!</h3>
+    <p>Your message has been sent successfully. We'll get back to you soon.</p>
+    <button onclick="closeThankYouPopup()">Close</button>
+  </div>
+
+  <a href="login.html" class="login-button">Login</a>
+
+  <script>
+    function showThankYouPopup() {
+      const popup = document.getElementById('thank-you-popup');
+      const overlay = document.getElementById('thank-you-overlay');
+      
+      // First show the elements
+      popup.style.display = 'block';
+      overlay.style.display = 'block';
+      
+      // Then add the show class after a small delay
+      setTimeout(() => {
+        popup.classList.add('show');
+        overlay.classList.add('show');
+      }, 10);
+    }
+
+    function closeThankYouPopup() {
+      const popup = document.getElementById('thank-you-popup');
+      const overlay = document.getElementById('thank-you-overlay');
+      
+      // Remove the show class
+      popup.classList.remove('show');
+      overlay.classList.remove('show');
+      
+      // Hide the elements after the transition
+      setTimeout(() => {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+      }, 300);
+    }
+
+    // Add form submission handler
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      showThankYouPopup();
+      this.reset();
+    });
+
+    // Close popup when clicking outside
+    window.onclick = function(event) {
+      const popup = document.getElementById('thank-you-popup');
+      const overlay = document.getElementById('thank-you-overlay');
+      if (event.target == overlay) {
+        closeThankYouPopup();
+      }
+    }
+  </script>
+</body>
+</html>
